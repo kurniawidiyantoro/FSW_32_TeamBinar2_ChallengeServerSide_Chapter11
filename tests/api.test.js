@@ -11,10 +11,10 @@ describe("This testing is for API:", () => {
 
     const response = await request.post("/login").send(credentials);
     expect(response.status).toBe(200);
-    expect(Object.keys(response._body)).toContain({ message, email, token });
+    expect(Object.keys(response.body)).toContain("message", "email", "token");
   });
 
-  it("Negative case: /login API testing, it should return 401 Unauthorized when invalid credentials are provided", async () => {
+  it("Negative case: /login API testing, it should return 400 Unauthorized when invalid credentials are provided", async () => {
     const credentials = {
       email: "wrong@example.com",
       password: "wrong",
@@ -22,7 +22,7 @@ describe("This testing is for API:", () => {
 
     const response = await request.post("/login").send(credentials);
     expect(response.status).toBe(400);
-    expect(Object.keys(response._body)).toContain({ message });
+    expect(Object.keys(response.body)).toContain("message");
   });
 
   it("Positive case: /usergame/insert API testing, it should return 200", async () => {
@@ -35,7 +35,7 @@ describe("This testing is for API:", () => {
 
     const response = await request.post("/usergame/insert").send(registerData);
     expect(response.status).toBe(200);
-    expect(Object.keys(response._body)).toContain({ message });
+    expect(Object.keys(response.body)).toContain("message");
   });
 
   it("Negative case: /usergame/insert API testing, it should return 400", async () => {
@@ -48,7 +48,7 @@ describe("This testing is for API:", () => {
 
     const response = await request.post("/usergame/insert").send(registerData);
     expect(response.status).toBe(400);
-    expect(Object.keys(response._body)).toContain({ message });
+    expect(Object.keys(response.body)).toContain("message");
   });
 
   it("Positive case: /gamehistory/get/all API testing, it should return 200", async () => {
@@ -61,7 +61,7 @@ describe("This testing is for API:", () => {
       .post("/gamehistory/get/all")
       .send(searchData);
     expect(response.status).toBe(200);
-    expect(Object.keys(response._body)).toContain({ data });
+    expect(Object.keys(response.body)).toContain("data");
   });
 
   it("Negative case: /gamehistory/get/all API testing, it should return 400", async () => {
@@ -74,7 +74,7 @@ describe("This testing is for API:", () => {
       .post("/gamehistory/get/all")
       .send(searchData);
     expect(response.status).toBe(400);
-    expect(Object.keys(response._body)).toContain({ data });
+    expect(Object.keys(response.body)).toContain("data");
   });
 
   it("Positive case: /gamehistory/get/rank API testing, it should return 200", async () => {
@@ -86,10 +86,10 @@ describe("This testing is for API:", () => {
       .post("/gamehistory/get/rank")
       .send(searchData);
     expect(response.status).toBe(200);
-    expect(Object.keys(response._body)).toContain({ data });
+    expect(Object.keys(response.body)).toContain("data");
   });
 
-  it("Negative case: /gamehistory/get/all API testing, it should return 400", async () => {
+  it("Negative case: /gamehistory/get/rank API testing, it should return 400", async () => {
     const searchData = {
       gamename: "gamex",
     };
@@ -98,6 +98,6 @@ describe("This testing is for API:", () => {
       .post("/gamehistory/get/rank")
       .send(searchData);
     expect(response.status).toBe(400);
-    expect(Object.keys(response._body)).toContain({ data });
+    expect(Object.keys(response.body)).toContain("data");
   });
 });
