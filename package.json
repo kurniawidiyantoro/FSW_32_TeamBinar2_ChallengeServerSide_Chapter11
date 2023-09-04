@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "dotenv-load nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "dev": "dotenv-load nodemon ./bin/www",
     "test": "jest --setupFiles dotenv/config"
   },
   "dependencies": {
